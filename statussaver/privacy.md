@@ -3,7 +3,7 @@
 **App:** Status Saver
 **Publisher:** Banyan Studio
 **Contact:** banyanstudio.dev@gmail.com
-**Last updated:** 2026-06-30
+**Last updated:** 2026-07-29
 
 This Privacy Policy describes how the Status Saver Android application ("the App", "we", "us") handles information when you use it. Please read it together with our [Terms & Conditions](terms.md).
 
@@ -11,7 +11,8 @@ The App does not sell or share your personal data, and does not use it to build 
 
 ## Summary
 
-- The App **does not collect your personal information**, and never sells or shares your data.
+- The App **does not collect your personal information** — no name, email, phone number, or account. It never sells your data or shares it for advertising.
+- The App collects **anonymous usage statistics and crash reports** to help us improve it. **You can turn this off at any time** in Settings → Privacy → "Share anonymous usage data".
 - The App **has no ads, no accounts, and no sign-up**.
 - **The photos and videos you view and save never leave your device** — the App does not upload your media anywhere.
 
@@ -23,10 +24,10 @@ The App does **not** collect or request any of the following:
 
 - Personal identifiers such as your name, email, or phone number
 - Account credentials or contact lists
-- Location data
+- Location data (beyond the coarse country-level information described in section 4)
 - The content of any photos or videos you view, save, or share
 
-The App shows no ads and contains no advertising or ad-attribution SDKs. The App does not sell or share your data with third parties.
+The App shows no ads and contains no advertising or ad-attribution SDKs. The App does not sell your data or share it for advertising.
 
 ## 2. Information the App accesses locally on your device
 
@@ -52,9 +53,26 @@ The App requires **no `MANAGE_EXTERNAL_STORAGE`** and **no broad storage permiss
 
 The App does **not** request location, contacts, camera, microphone, or background-execution permissions.
 
-## 4. Network activity
+## 4. Network activity, anonymous usage data, and crash reports
 
-The App does not upload the photos or videos you view or save — that media never leaves your device. The App contains no advertising network and does not sell or share your personal data.
+The App does not upload the photos or videos you view or save — that media never leaves your device. The App contains no advertising network and does not sell your personal data or share it for advertising.
+
+### Anonymous usage data and crash reports
+
+To understand which features are used and to find and fix crashes, the App uses two services provided by Google LLC as our processors:
+
+- **Google Analytics for Firebase** — anonymous usage statistics
+- **Firebase Crashlytics** — crash reports
+
+**What is collected:** app interaction events (for example: completing first-time setup, saving, sharing, or reposting a status — never the media itself or its file names), device model, operating system version, country, app version, crash stack traces, and a randomly generated app-instance identifier. This identifier is not tied to your name, email, phone number, or any account — the App has none of those — and we make no attempt to identify you from it.
+
+**What is never collected:** the content of your photos and videos, file names, anything you type, your contacts, or your precise location.
+
+**Opt-out:** you can turn collection off at any time in **Settings → Privacy → "Share anonymous usage data"**. The switch takes effect immediately, covers both services, and persists until you turn it back on.
+
+**Retention:** analytics event data is retained on Google's servers for at most 14 months and is then deleted automatically. Crash reports follow Firebase's standard retention (90 days). Google's handling of this data is described in the [Google Privacy Policy](https://policies.google.com/privacy) and [Firebase Privacy and Security](https://firebase.google.com/support/privacy) documentation.
+
+**Legal basis (where GDPR applies):** our legitimate interest in understanding aggregate feature usage and keeping the App free of crashes, balanced by the anonymous nature of the data and the always-available opt-out.
 
 The Google Play Store itself may collect aggregate install or crash information independently of the App. That collection is governed by Google's own Privacy Policy and is outside our control.
 
@@ -64,11 +82,12 @@ The App is rated for general audiences and is not directed specifically at child
 
 ## 6. Data retention
 
-We do not hold your personal data on any server, so there is nothing for us to retain or delete on our side.
+We do not hold your personal data on any server of our own. Anonymous usage statistics and crash reports are retained by Google on our behalf for the periods described in section 4 (14 months for analytics events, 90 days for crash reports) and are then deleted automatically.
 
 Locally, the App stores the following on your device only:
 
 - The SAF folder URI you granted, in the App's private DataStore
+- Your theme and analytics preferences, in the App's private DataStore
 - Files you explicitly save, in your device's public Pictures / Movies folders
 
 You can remove the SAF URI at any time by clearing the App's data in **Settings → Apps → Status Saver → Storage → Clear data**, or by uninstalling the App. Saved files in your gallery are yours and remain on your device until you delete them.
