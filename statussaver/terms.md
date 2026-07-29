@@ -3,13 +3,15 @@
 **App:** Status Saver
 **Publisher:** Banyan Studio
 **Contact:** banyanstudio.dev@gmail.com
-**Last updated:** 2026-06-30
+**Last updated:** 2026-07-29
 
 These Terms & Conditions ("Terms") govern your use of the Status Saver Android application ("the App"). By installing or using the App, you agree to these Terms. If you do not agree, do not install or use the App.
 
 ## 1. What the App does
 
 Status Saver lets you browse photo and video files that another chat app has already downloaded to your device when you viewed a contact's status, preview those files inside Status Saver, save copies of them to your phone's gallery, and re-share them through Android's standard share sheet.
+
+The App also offers **Repost**, which hands a file directly to WhatsApp and opens WhatsApp's own status composer with it attached. **You** then post it, or cancel, from inside WhatsApp — the App never posts anything on your behalf and cannot tell whether you went on to post. Repost requires WhatsApp to be installed, and whatever you post through it is governed by WhatsApp's own terms, not ours. Your responsibilities in Section 5 apply in full to anything you repost.
 
 The App only works with media that **already exists on your device** as a result of you viewing it inside the underlying chat app. The App does **not** download media from any remote server, does **not** connect to any messaging service, and does **not** bypass any access control on any other app.
 
@@ -49,7 +51,7 @@ We reserve the right (but have no obligation) to investigate misuse and to coope
 
 ## 6. Privacy
 
-The App does not sell or share your personal data, and the photos and videos you view or save stay on your device. For full details see the [Privacy Policy](privacy.html).
+The App does not sell or share your personal data, and the photos and videos you view or save stay on your device. For full details see the [Privacy Policy](privacy.md).
 
 ## 7. Updates and changes to the App
 
@@ -58,6 +60,16 @@ The App may be updated from time to time through the Google Play Store. Updates 
 ## 8. Third-party services
 
 The App is distributed through the Google Play Store, which is operated by Google and governed by Google's own terms and privacy policy. Your relationship with Google is independent of your relationship with us.
+
+The App additionally uses three services provided by Google LLC:
+
+- **Google Analytics for Firebase** — anonymous usage statistics.
+- **Firebase Crashlytics** — crash reports.
+- **Google Play in-app review** — the optional prompt asking whether you would like to rate the App. The prompt is drawn by Google Play, and any review you submit goes to Google Play, not to us.
+
+The first two can be switched off entirely at any time in **Settings → Privacy → "Share anonymous usage data"**. What each service collects, how long it is kept, where it is processed, and the rights you have over it are set out in the [Privacy Policy](privacy.md), which governs in the event of any inconsistency with this section.
+
+**Repost** hands files to WhatsApp, as described in Section 1. WhatsApp is not our service, we have no agreement with its operator, and your use of it is governed by its own terms.
 
 The App integrates no advertising networks or ad-attribution SDKs, and does not sell or share your data.
 
