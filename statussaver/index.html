@@ -298,7 +298,13 @@
         .closing p {
             font-family: "DM Serif Display", Georgia, serif; font-style: italic;
             font-size: clamp(1.5rem, 4vw, 1.85rem);
-            margin: 48px 0 28px;
+            margin: 48px auto 28px;
+            /* Even out the two lines on narrow screens rather than filling the
+               first and leaving a stub on the second. Ignored by browsers that
+               do not support it, where the nbsp in the copy still prevents the
+               worst break. */
+            text-wrap: balance;
+            max-width: 20em;
         }
 
         /* Official Google Play badge.
@@ -484,7 +490,9 @@
 
         <!-- CLOSING -->
         <section class="closing" id="get">
-            <p>Yours to keep.</p>
+            <!-- nbsp keeps "have it?" together: without it the line breaks
+                 after "have" on a phone and orphans "it?" on its own line. -->
+            <p>Why ask when you already have&nbsp;it?</p>
             <a class="play-badge" href="https://play.google.com/store/apps/details?id=io.github.banyanstudio.statussaver">
                 <img src="google-play-badge.png" alt="Get it on Google Play" width="646" height="250">
             </a>
