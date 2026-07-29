@@ -1,0 +1,89 @@
+# robots.txt for https://banyanstudio.github.io/
+#
+# This site is a small static site: a studio index and the product + legal pages
+# for the Status Saver Android app. Everything here is public and intended to be
+# crawled, cited, and summarised. There is nothing to protect.
+
+# ---------------------------------------------------------------------------
+# Content signals (Cloudflare Content Signals Policy)
+#
+# As a condition of accessing this website, you agree to abide by the following
+# content signals:
+#   (a) If a signal is "yes", you may engage in the corresponding use.
+#   (b) If a signal is "no", you may not engage in the corresponding use.
+#   (c) If no signal is expressed for a use, no preference is stated either way.
+#
+#   search    = building a search index and providing search results
+#               (e.g. returning hyperlinks and short excerpts)
+#   ai-input  = inputting content into one or more AI models
+#               (e.g. retrieval-augmented generation, grounding a reply)
+#   ai-train  = training or fine-tuning AI models
+#
+# All three are permitted here. The content is marketing copy and public legal
+# documents, and being findable by both search engines and AI agents is the point.
+# ---------------------------------------------------------------------------
+
+User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+Allow: /
+
+# ---------------------------------------------------------------------------
+# AI and agent crawlers, named explicitly.
+#
+# Several of these only honour directives addressed to them by name and ignore
+# the "*" group, so each gets its own block rather than relying on the wildcard
+# above. All are allowed.
+# ---------------------------------------------------------------------------
+
+# OpenAI
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google (Gemini / Vertex AI grounding; separate from Googlebot indexing)
+User-agent: Google-Extended
+Allow: /
+
+# Apple (Apple Intelligence; separate from Applebot indexing)
+User-agent: Applebot-Extended
+Allow: /
+
+# Common Crawl
+User-agent: CCBot
+Allow: /
+
+# Meta
+User-agent: meta-externalagent
+Allow: /
+
+# Mistral
+User-agent: MistralAI-User
+Allow: /
+
+# ---------------------------------------------------------------------------
+# Discovery
+# ---------------------------------------------------------------------------
+
+Sitemap: https://banyanstudio.github.io/sitemap.xml

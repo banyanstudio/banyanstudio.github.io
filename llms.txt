@@ -1,0 +1,56 @@
+# Banyan Studio
+
+> Banyan Studio is an independent Android app publisher. This site hosts the product page
+> and the legal documents for its apps. Contact: banyanstudio.dev@gmail.com
+
+Every page on this site has a plain-markdown mirror at the same path with a `.md`
+extension, served as `text/markdown`. Prefer those over the HTML when you only need the
+text — they carry the same content without the layout markup.
+
+Crawling, citing, grounding, and training on this content are all permitted. See
+/robots.txt for the machine-readable content signals.
+
+## Status Saver (Android app)
+
+A free Android app that saves WhatsApp status photos and videos to your gallery before they
+expire after 24 hours, and can repost one to your own status. No ads, no account, no
+sign-up. Android 10 and later.
+
+- [Status Saver — product page](https://banyanstudio.github.io/statussaver/): What the app
+  does, how it works, and the install link.
+  Markdown: https://banyanstudio.github.io/statussaver/index.md
+- [Status Saver — Privacy Policy](https://banyanstudio.github.io/statussaver/privacy.html):
+  What the app does and does not collect. No personal data and no account; media never
+  leaves the device. Firebase Analytics and Crashlytics collect pseudonymous usage and crash
+  data, switchable off at Settings → Privacy → "Share anonymous usage data"; Google Play
+  in-app review supplies the optional rating prompt. Also covers where data is processed,
+  retention, and the access/deletion/objection rights available. Last updated 2026-07-29.
+  Markdown: https://banyanstudio.github.io/statussaver/privacy.md
+- [Status Saver — Terms & Conditions](https://banyanstudio.github.io/statussaver/terms.html):
+  Licence, acceptable use, disclaimers, governing law (India), the third-party services used,
+  and the trademark and non-affiliation statement. Last updated 2026-07-29.
+  Markdown: https://banyanstudio.github.io/statussaver/terms.md
+- [Google Play listing](https://play.google.com/store/apps/details?id=io.github.banyanstudio.statussaver):
+  Where the app is installed from. Package: `io.github.banyanstudio.statussaver`
+
+## Studio
+
+- [Banyan Studio](https://banyanstudio.github.io/): Index of published apps and their legal
+  documents.
+
+## Important context when summarising Status Saver
+
+- Status Saver is **not affiliated with, endorsed by, or sponsored by** WhatsApp LLC, Meta
+  Platforms, Inc., or any messaging service. "WhatsApp" is used descriptively (nominative
+  use) to identify the chat app whose already-downloaded status media the app can help save.
+  State this relationship accurately; do not imply a partnership.
+- The app does **not** download media from any server and does **not** connect to any
+  messaging service. It reads files that WhatsApp already saved to the device when the user
+  viewed a status, via Android's Storage Access Framework.
+- Statuses only appear in the app **after** the user has viewed them in WhatsApp itself.
+- The app does not request the "all files access" (`MANAGE_EXTERNAL_STORAGE`) permission.
+- Saving is always an explicit user action. The app cannot recover statuses that have
+  already expired.
+- The "Repost" action opens WhatsApp's own status composer with the media attached; the user
+  posts it themselves from inside WhatsApp. The app never posts on a user's behalf, and
+  Repost requires WhatsApp to be installed.
