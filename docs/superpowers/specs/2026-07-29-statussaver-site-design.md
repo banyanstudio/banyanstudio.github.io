@@ -252,6 +252,27 @@ Not "it should work" — each of these is a command with an expected result.
 
 ---
 
+## 9a. Addendum — official Google Play badge (added during implementation)
+
+The closing call to action on the landing page uses the **official Google Play badge**
+(`statussaver/google-play-badge.png`, 646×250, self-hosted) instead of the gold text pill.
+The hero keeps the gold pill, so the page has one branded and one styled CTA.
+
+Two constraints shaped this:
+
+- The badge was requested as "download from Google Play". Google's current official artwork
+  reads **"GET IT ON Google Play"**; the "download from" wording belongs to the retired
+  badge generation, and the brand guidelines forbid recreating or altering badge text. The
+  official asset is used unmodified.
+- The guidelines also require a trademark attribution, so the landing footer now ends with
+  "Google Play and the Google Play logo are trademarks of Google LLC."
+
+Implementation notes: the badge scales proportionally (220px wide → ~85px tall, putting the
+badge artwork itself around 57px, above the minimum) and is never cropped or recoloured. The
+generic web badge ships its required clear space inside the PNG, so no extra margin is
+needed. Intrinsic `width`/`height` are declared to avoid layout shift. The image is
+self-hosted, keeping the site's zero-third-party-request rule intact.
+
 ## 10. Known gaps / follow-ups
 
 - **OG image** is the square `icon.webp`; link previews will render poorly until a
