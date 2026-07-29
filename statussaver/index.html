@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Status Saver — save the WhatsApp status photos and videos you like to your gallery before they vanish in 24 hours. No ads, no sign-up.">
+    <title>Status Saver — save statuses before they vanish</title>
+    <link rel="icon" type="image/webp" href="icon.webp">
+    <link rel="canonical" href="https://banyanstudio.github.io/statussaver/">
+
+    <!-- Machine-readable mirror of this page, served as text/markdown.
+         Also listed in /llms.txt. -->
+    <link rel="alternate" type="text/markdown" href="index.md" title="Markdown version">
+
+    <meta property="og:title" content="Status Saver — save statuses before they vanish">
+    <meta property="og:description" content="Save WhatsApp status photos and videos to your gallery. No ads, no sign-up.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Banyan Studio">
+    <meta property="og:url" content="https://banyanstudio.github.io/statussaver/">
+    <!-- Known gap: this is the square app icon. A 1200x630 card is a follow-up. -->
+    <meta property="og:image" content="https://banyanstudio.github.io/statussaver/icon.webp">
+    <meta name="twitter:card" content="summary">
+
+    <link rel="stylesheet" href="site.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://banyanstudio.github.io/#organization",
+          "name": "Banyan Studio",
+          "url": "https://banyanstudio.github.io/",
+          "email": "banyanstudio.dev@gmail.com"
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "Status Saver",
+          "url": "https://banyanstudio.github.io/statussaver/",
+          "operatingSystem": "Android 10 and later",
+          "applicationCategory": "UtilitiesApplication",
+          "description": "Browse the status photos and videos your contacts posted in the last 24 hours, preview them full screen, and save the originals to your gallery before they expire.",
+          "downloadUrl": "https://play.google.com/store/apps/details?id=io.github.banyanstudio.statussaver",
+          "installUrl": "https://play.google.com/store/apps/details?id=io.github.banyanstudio.statussaver",
+          "publisher": { "@id": "https://banyanstudio.github.io/#organization" },
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "privacyPolicy": "https://banyanstudio.github.io/statussaver/privacy.html",
+          "termsOfService": "https://banyanstudio.github.io/statussaver/terms.html"
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        /* ============================================================
+           LANDING-PAGE-ONLY CSS.
+           Tokens, fonts, base, header, footer and .cta live in site.css,
+           which every page under /statussaver/ shares. Everything below
+           is used by this page alone.
+           ============================================================ */
+
+        /* ============================================================
+           HERO — asymmetric split (copy left / phone right >=760px)
+           ============================================================ */
+        .hero { padding: 64px 0 40px; }
+        @media (min-width: 760px) {
+            .hero {
+                display: grid;
+                grid-template-columns: 52fr 48fr;
+                align-items: center;
+                gap: 40px;
+                padding: 88px 0 56px;
+            }
+        }
+
+        .app-mark {
+            width: 56px; height: 56px; border-radius: 50%;
+            filter: drop-shadow(0 8px 20px rgba(31, 64, 48, 0.28));
+            margin-bottom: 20px;
+            display: block;
+        }
+        @media (prefers-color-scheme: dark) {
+            .app-mark { filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.5)); }
+        }
+
+        /* 0.78rem = 12.5px. Kept above 12px because this is real page
+           content, not the decorative mockup: below 12px it trips the
+           legible-font-size check and is genuinely hard to read at this
+           letter-spacing. */
+        .eyebrow {
+            font-size: 0.78rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.14em;
+            color: var(--sub);
+            margin-bottom: 16px;
+        }
+
+        /* Display h1 — overrides the document h1 in site.css. */
+        .hero h1 {
+            font-family: "DM Serif Display", Georgia, serif;
+            font-style: italic;
+            font-weight: 400;
+            color: var(--ink);
+            font-size: clamp(2.3rem, 6vw, 3.6rem);
+            line-height: 1.08;
+            letter-spacing: -0.01em;
+            margin-bottom: 20px;
+        }
+
+        .hero .lede {
+            font-size: 1.08rem; font-weight: 500;
+            color: var(--sub); max-width: 32em;
+            margin-bottom: 32px;
+        }
+
+        /* Trust line — single middot-separated line, gold middots */
+        .trust {
+            margin-top: 24px;
+            font-size: 0.82rem; font-weight: 600; color: var(--sub);
+        }
+        .trust .mid { color: var(--gold); padding: 0 6px; }
+
+        /* ============================================================
+           PHONE MOCKUP (decorative, aria-hidden)
+           ============================================================ */
+        .hero-visual {
+            display: flex; flex-direction: column; align-items: center;
+            margin-top: 48px;
+        }
+        @media (min-width: 760px) {
+            .hero-visual { margin-top: 0; }
+        }
+
+        .phone {
+            width: 260px; max-width: 78vw;
+            aspect-ratio: 1 / 2;
+            background: var(--phone-bezel);
+            border-radius: 30px;
+            padding: 10px;
+            box-shadow: var(--phone-shadow), inset 0 0 0 1px var(--phone-ring);
+            transform: rotate(0deg);
+        }
+        @media (min-width: 760px) {
+            .phone { transform: rotate(2deg); }
+        }
+        .screen {
+            width: 100%; height: 100%;
+            background: var(--phone-screen);
+            border-radius: 22px;
+            padding: 14px 12px;
+            display: flex; flex-direction: column; gap: 12px;
+            overflow: hidden;
+        }
+
+        /* app bar */
+        .screen-bar { display: flex; gap: 14px; padding: 2px 2px 0; }
+        .screen-bar span {
+            font-size: 0.7rem; font-weight: 600; color: var(--sub);
+        }
+        .screen-bar span.active { color: var(--ink); }
+
+        /* 2-col media grid */
+        .screen-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+        }
+        .mtile {
+            position: relative;
+            aspect-ratio: 3 / 4;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .mtile .fill { position: absolute; inset: 0; }
+        .mtile.a .fill { background: var(--tile-a); }
+        .mtile.b .fill { background: var(--tile-b); }
+        .mtile.c .fill { background: var(--tile-c); }
+        .mtile.plain { opacity: 0.85; }
+
+        /* top-left protagonist — dissolved end state is the base */
+        .mtile.expiring .fill {
+            opacity: 0.32;
+            filter: blur(1.4px) grayscale(0.4);
+            animation: dissolve 1150ms ease-out 250ms both;
+        }
+        .mtile.expiring .ring {
+            position: absolute; inset: 4px;
+            border: 1.5px dashed var(--dashed);
+            border-radius: 6px;
+            opacity: 1;
+            animation: ringfade 900ms ease-out 350ms both;
+        }
+        .exp-label {
+            position: absolute; top: 5px; left: 6px;
+            font-size: 0.6rem; font-weight: 600; color: var(--sub);
+            background: var(--phone-screen);
+            padding: 1px 5px; border-radius: 4px;
+        }
+
+        /* saved-disc badge */
+        .disc {
+            position: absolute; top: 6px; right: 6px;
+            width: 24px; height: 24px; border-radius: 50%;
+            background: var(--forest);
+            border: 2.5px solid var(--disc-ring);
+            display: grid; place-items: center;
+        }
+        .disc svg { width: 12px; height: 12px; stroke: #F1ECDD; }
+        .disc.saved-disc {
+            transform: scale(1);
+            animation: discpop 420ms cubic-bezier(.34, 1.56, .64, 1) 1200ms both;
+        }
+
+        /* gold Save pill on the saved twin */
+        .save-pill {
+            position: absolute; left: 6px; right: 6px; bottom: 6px;
+            background: var(--gold); color: var(--gold-ink);
+            font-size: 0.62rem; font-weight: 700;
+            border-radius: 999px; padding: 4px 8px;
+            display: flex; align-items: center; justify-content: center; gap: 4px;
+            transform: translateY(0);
+            animation: pillrise 380ms ease-out 1200ms both;
+        }
+        .save-pill svg { width: 9px; height: 9px; stroke: var(--gold-ink); }
+
+        /* video duration pill */
+        .pill {
+            position: absolute; bottom: 6px; right: 6px;
+            background: rgba(22, 22, 20, 0.72); color: #F1ECDD;
+            font-size: 0.62rem; font-weight: 600;
+            border-radius: 999px; padding: 3px 8px;
+            display: flex; align-items: center; gap: 4px;
+        }
+        .pill svg { width: 8px; height: 8px; fill: #F1ECDD; }
+
+        .tile-note {
+            text-align: center; font-size: 0.82rem; color: var(--sub);
+            max-width: 22em; margin-top: 22px;
+        }
+
+        /* ============================================================
+           FEATURES — 3-col grid >=760px
+           ============================================================ */
+        .features {
+            padding: 64px 0 8px;
+            display: grid; gap: 14px;
+        }
+        /* 2x2 rather than a single row: four cards in three columns would
+           orphan the fourth, and at this container width two columns give each
+           card ~347px instead of ~215px, which stops the body copy wrapping
+           every few words. */
+        @media (min-width: 760px) {
+            .features { grid-template-columns: repeat(2, 1fr); }
+        }
+        .feature {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 26px;
+        }
+        .feature .glyph {
+            width: 28px; height: 28px;
+            margin-bottom: 16px;
+            color: var(--ink);
+        }
+        .feature .glyph svg { width: 28px; height: 28px; display: block; }
+        .feature .glyph.gold { color: var(--gold); }
+        .feature h2 {
+            font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em;
+            margin-bottom: 8px;
+        }
+        .feature p { font-size: 0.94rem; color: var(--sub); }
+        .feature code {
+            font-family: ui-monospace, "JetBrains Mono", monospace;
+            font-size: 0.85em;
+        }
+
+        /* ============================================================
+           NOTE ASIDE
+           ============================================================ */
+        .note {
+            margin: 32px 0 0; padding: 18px 24px;
+            border-left: 3px solid var(--gold);
+            font-size: 0.88rem; color: var(--sub);
+        }
+
+        /* ============================================================
+           CLOSING
+           ============================================================ */
+        .closing {
+            text-align: center;
+            padding: 72px 0 20px;
+            margin-top: 56px;
+            border-top: 1px solid var(--line);
+        }
+        .closing p {
+            font-family: "DM Serif Display", Georgia, serif; font-style: italic;
+            font-size: clamp(1.5rem, 4vw, 1.85rem);
+            margin: 48px 0 28px;
+        }
+
+        /* Official Google Play badge.
+           Per Google Play's brand guidelines the artwork must not be
+           altered, recoloured or recreated, and its clear space must be
+           preserved — the generic web badge ships that padding inside the
+           PNG, so it is scaled proportionally and never cropped. At 220px
+           wide the badge itself lands around 57px tall, above the minimum. */
+        .play-badge {
+            display: inline-block;
+            line-height: 0;   /* drops the inline-image descender gap */
+            transition: transform 120ms ease-out;
+        }
+        .play-badge:hover { transform: translateY(-1px); }
+        .play-badge img {
+            display: block;
+            width: 220px; height: auto;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .play-badge { transition: none; }
+        }
+
+        /* ============================================================
+           LOAD ANIMATION KEYFRAMES (phone mockup only)
+           ============================================================ */
+        @keyframes dissolve {
+            0%   { opacity: 1;    filter: blur(0) grayscale(0); }
+            100% { opacity: 0.32; filter: blur(1.4px) grayscale(0.4); }
+        }
+        @keyframes ringfade {
+            0%   { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes discpop {
+            0%   { transform: scale(0.6); opacity: 0; }
+            60%  { opacity: 1; }
+            75%  { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        @keyframes pillrise {
+            0%   { transform: translateY(6px); opacity: 0; }
+            100% { transform: translateY(0);   opacity: 1; }
+        }
+
+        /* ============================================================
+           REDUCED MOTION — render animation END STATES statically.
+           The base rules already carry the end state, so switching the
+           animations off is enough; no overrides needed.
+           ============================================================ */
+        @media (prefers-reduced-motion: reduce) {
+            .mtile.expiring .fill,
+            .mtile.expiring .ring,
+            .disc.saved-disc,
+            .save-pill { animation: none; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site">
+        <div class="wrap">
+            <a class="studio" href="../">Banyan Studio</a>
+            <nav>
+                <a href="./" aria-current="page">Status Saver</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a class="nav-cta" href="https://play.google.com/store/apps/details?id=io.github.banyanstudio.statussaver">Get the app</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="wrap">
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-copy">
+                <img class="app-mark" src="icon.webp" alt="Status Saver app icon" width="56" height="56">
+                <p class="eyebrow">Status Saver for WhatsApp</p>
+                <h1>Statuses vanish in 24&nbsp;hours.<br>Yours don&rsquo;t have to.</h1>
+                <p class="lede">Status Saver keeps the status photos and videos you actually want — view them full screen, save the originals to your gallery, share them onward. One tap each.</p>
+                <a class="cta" href="https://play.google.com/store/apps/details?id=io.github.banyanstudio.statussaver">Get it on Google Play</a>
+                <p class="trust">No ads <span class="mid">&middot;</span> No sign-up</p>
+            </div>
+
+            <div class="hero-visual">
+                <div class="phone" aria-hidden="true">
+                    <div class="screen">
+                        <div class="screen-bar">
+                            <span class="active">Recent</span>
+                            <span>Saved</span>
+                        </div>
+                        <div class="screen-grid">
+                            <!-- top-left: expiring protagonist -->
+                            <div class="mtile b expiring">
+                                <div class="fill"></div>
+                                <div class="ring"></div>
+                                <div class="exp-label">expiring</div>
+                            </div>
+                            <!-- top-right: saved twin -->
+                            <div class="mtile a">
+                                <div class="fill"></div>
+                                <div class="disc saved-disc">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.8 9.5 18 19.5 6.5"/></svg>
+                                </div>
+                                <div class="save-pill">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.8 9.5 18 19.5 6.5"/></svg>Saved
+                                </div>
+                            </div>
+                            <!-- bottom-left: video -->
+                            <div class="mtile c">
+                                <div class="fill"></div>
+                                <div class="pill"><svg viewBox="0 0 10 10"><path d="M1.5 0.8 9 5 1.5 9.2z"/></svg>0:14</div>
+                            </div>
+                            <!-- bottom-right: plain -->
+                            <div class="mtile a plain">
+                                <div class="fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="tile-note">Saved statuses stay in your gallery — even after the originals expire.</p>
+            </div>
+        </section>
+
+        <!-- FEATURES -->
+        <section class="features">
+            <div class="feature">
+                <div class="glyph" aria-hidden="true">
+                    <svg viewBox="0 0 28 28" fill="currentColor">
+                        <rect x="2" y="2" width="10" height="10" rx="2.5"/>
+                        <rect x="16" y="2" width="10" height="10" rx="2.5"/>
+                        <rect x="2" y="16" width="10" height="10" rx="2.5"/>
+                        <rect x="16" y="16" width="10" height="10" rx="2.5"/>
+                    </svg>
+                </div>
+                <h2>Browse the last 24 hours</h2>
+                <p>Every status your contacts have posted, in one grid. Tap any photo or video for a full-screen preview.</p>
+            </div>
+            <div class="feature">
+                <div class="glyph gold" aria-hidden="true">
+                    <svg viewBox="0 0 28 28" fill="none">
+                        <rect x="1.5" y="8" width="25" height="12" rx="6" fill="currentColor"/>
+                        <path d="M9 14l3 3 6-6" stroke="var(--gold-ink)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h2>Save in one tap</h2>
+                <p>Originals land straight in your gallery — photos in <code>Pictures/Status Saver Images</code>, videos in <code>Movies/Status Saver Videos</code>. Share them onward to any app from there.</p>
+            </div>
+            <div class="feature">
+                <!-- Same two-arrow recycle-loop glyph the app uses for Repost
+                     (ui/common/RepostIcon.kt), so the site and the app agree.
+                     The paths stay verbatim from the app, so the viewBox stays
+                     24-unit while its sibling glyphs are 28-unit. That means it
+                     is scaled up by 28/24, which would render a 1.9 stroke at
+                     2.22px and read heavier than the other three glyphs — so
+                     the stroke is pre-divided by the same ratio instead of
+                     rescaling the paths. 1.9 x 24/28 = 1.63. -->
+                <div class="glyph" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.63" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 17V6h12"/>
+                        <path d="M14 3l3 3-3 3"/>
+                        <path d="M19 7v11H7"/>
+                        <path d="M10 15l-3 3 3 3"/>
+                    </svg>
+                </div>
+                <h2>Repost to your status</h2>
+                <p>Found one worth sharing again? Repost opens WhatsApp&rsquo;s own status composer with the photo or video already attached — you post it from there.</p>
+            </div>
+            <div class="feature">
+                <div class="glyph" aria-hidden="true">
+                    <svg viewBox="0 0 28 28" fill="none">
+                        <circle cx="14" cy="14" r="12" fill="currentColor"/>
+                        <path d="M8.5 14.4l3.6 3.6 7.4-7.4" stroke="var(--card)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h2>Private by design</h2>
+                <p>No account, no ads, and your photos and videos never leave your device. The app reads only media already on your phone through Android&rsquo;s scoped storage — no &ldquo;all files access&rdquo; permission. Anonymous usage and crash reporting can be switched off in Settings.</p>
+            </div>
+        </section>
+
+        <!-- NOTE ASIDE -->
+        <aside class="note">
+            Statuses appear in the app once you&rsquo;ve viewed them in WhatsApp itself — that&rsquo;s when the media is downloaded to your phone.
+        </aside>
+
+        <!-- CLOSING -->
+        <section class="closing" id="get">
+            <p>Yours to keep.</p>
+            <a class="play-badge" href="https://play.google.com/store/apps/details?id=io.github.banyanstudio.statussaver">
+                <img src="google-play-badge.png" alt="Get it on Google Play" width="646" height="250">
+            </a>
+        </section>
+    </main>
+
+    <footer class="site">
+        <div class="wrap">
+            <div class="links">
+                <a href="../">Banyan Studio</a>
+                <a href="./">Status Saver</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms &amp; Conditions</a>
+                <a href="mailto:banyanstudio.dev@gmail.com">Contact</a>
+            </div>
+            <p class="legal">&copy; Banyan Studio. Status Saver is an independent utility and is not affiliated with, endorsed by, or sponsored by WhatsApp LLC, Meta Platforms,&nbsp;Inc., or any messaging service. Google Play and the Google Play logo are trademarks of Google&nbsp;LLC.</p>
+        </div>
+    </footer>
+</body>
+</html>

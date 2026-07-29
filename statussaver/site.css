@@ -1,0 +1,307 @@
+/* ============================================================
+   Status Saver — shared design layer
+   ------------------------------------------------------------
+   Used by every page under /statussaver/: index.html, privacy.html,
+   terms.html. Holds the theme tokens, the two self-hosted typefaces,
+   the shared header/footer chrome, and the document typography the
+   legal pages rely on.
+
+   Page-specific CSS does NOT belong here. The landing page's hero,
+   phone mockup, feature cards and keyframes live inline in
+   index.html, because only one page uses them.
+
+   The root /style.css is a separate, older stylesheet still used by
+   the studio root page. Do not merge the two — this palette is
+   Status Saver's, taken from the app's own theme, and should not
+   become the studio-wide brand.
+   ============================================================ */
+
+/* ============================================================
+   FONTS — self-hosted latin subsets (see fonts/OFL.txt).
+   unicode-range is deliberately omitted: one subset per family,
+   so any glyph the subset lacks (e.g. U+2192 "arrow") falls back
+   per-glyph to the system stack, which is the behaviour we want.
+   ============================================================ */
+@font-face {
+    font-family: "Plus Jakarta Sans";
+    font-style: normal;
+    font-weight: 400 800;      /* variable font, covers the whole range in use */
+    font-display: swap;
+    src: url("fonts/plus-jakarta-sans-latin.woff2") format("woff2");
+}
+@font-face {
+    font-family: "DM Serif Display";
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url("fonts/dm-serif-display-italic-latin.woff2") format("woff2");
+}
+
+/* ============================================================
+   THEME TOKENS — every colour is a var that flips per theme.
+   ============================================================ */
+:root {
+    --forest: #1F4030;
+    --page: #F1ECDD;
+    --card: #FAF4E2;
+    --ink: #1F4030;
+    --sub: rgba(31, 64, 48, 0.62);
+    --line: rgba(31, 64, 48, 0.12);
+    --gold: #C9A449;
+    --gold-ink: #1F1A0E;
+    --terra: #B8533A;
+    --disc-ring: #F4ECDC;
+
+    /* Link colours are their own tokens rather than reusing --gold:
+       gold on cream is ~2.3:1 and fails WCAG AA for body text.
+       These deep/light terracottas clear 5.5:1 and 7.9:1. */
+    --link: #9C4429;
+    --link-hover: #7A3420;
+
+    --tile-a: linear-gradient(160deg, #2E5B43, #17352A);
+    --tile-b: linear-gradient(150deg, #D9A15E, #B8533A);
+    --tile-c: linear-gradient(165deg, #4A6B7A, #22333C);
+
+    /* phone mockup */
+    --phone-bezel: var(--forest);
+    --phone-ring: transparent;
+    --phone-screen: #F1ECDD;
+    --phone-shadow: 0 20px 50px rgba(31, 64, 48, 0.20);
+    --dashed: rgba(31, 64, 48, 0.40);
+
+    /* CTA gold glow */
+    --cta-glow: rgba(201, 164, 73, 0.35);
+    --cta-glow-hover: rgba(201, 164, 73, 0.45);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --page: #161614;
+        --card: #222A26;
+        --ink: #F4ECDC;
+        --sub: rgba(244, 236, 220, 0.60);
+        --line: rgba(244, 236, 220, 0.14);
+        --gold: #C89559;
+        --disc-ring: #161614;
+
+        --link: #E5936F;
+        --link-hover: #F0AE90;
+
+        --phone-bezel: var(--card);
+        --phone-ring: var(--line);
+        --phone-screen: #121210;
+        --phone-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        --dashed: rgba(244, 236, 220, 0.35);
+
+        --cta-glow: rgba(200, 149, 89, 0.25);
+        --cta-glow-hover: rgba(200, 149, 89, 0.38);
+    }
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+    background: var(--page);
+    color: var(--ink);
+    font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.6;
+}
+
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+a:focus-visible,
+.cta:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* ============================================================
+   HEADER — shared by all three pages
+   ============================================================ */
+header.site { padding: 28px 0 0; }
+
+header.site .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 14px;
+}
+
+.studio {
+    font-weight: 800; font-size: 0.95rem; letter-spacing: -0.02em;
+    color: var(--ink); text-decoration: none;
+}
+.studio:hover { opacity: 0.75; }
+
+header.site nav {
+    display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
+}
+
+/* padding, not line-height: it grows the hit area to >=24px tall for
+   WCAG 2.2 SC 2.5.8 without opening up the space between the text rows.
+   The nav is a flex row with align-items:center, so the box grows around
+   the label and the label itself does not move. */
+header.site nav a {
+    font-size: 0.85rem; font-weight: 600; color: var(--sub);
+    text-decoration: none;
+    padding: 5px 0;
+}
+header.site nav a:hover { color: var(--ink); }
+
+/* Current page marker — carries its own weight/colour so the cue
+   does not depend on colour alone. */
+header.site nav a[aria-current="page"] {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+/* Small gold pill in the nav, mirroring the hero CTA. */
+header.site nav a.nav-cta {
+    background: var(--gold); color: var(--gold-ink);
+    font-weight: 700;
+    padding: 7px 16px; border-radius: 999px;
+}
+header.site nav a.nav-cta:hover { color: var(--gold-ink); opacity: 0.88; }
+
+/* ============================================================
+   CTA — gold pill (the primary use of gold)
+   ============================================================ */
+.cta {
+    display: inline-block;
+    background: var(--gold); color: var(--gold-ink);
+    font-weight: 700; font-size: 1rem;
+    padding: 15px 34px; border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px var(--cta-glow);
+    transition: transform 120ms ease-out, box-shadow 120ms ease-out;
+}
+.cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px var(--cta-glow-hover);
+}
+
+/* ============================================================
+   DOCUMENT TYPOGRAPHY — the legal pages (privacy.html, terms.html)
+   ------------------------------------------------------------
+   Structure carried over from the original root style.css, which
+   was well built for dense legal copy. Only the palette and the
+   typefaces change. The landing page overrides h1 with its own
+   display treatment.
+   ============================================================ */
+.doc { padding: 48px 24px 96px; }
+
+.doc h1 {
+    font-size: 2rem; font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+}
+
+.doc h2 {
+    font-size: 1.25rem; font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 40px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--line);
+}
+
+.doc h3 {
+    font-size: 1.06rem; font-weight: 700;
+    margin: 28px 0 10px;
+}
+
+.doc p, .doc ul, .doc ol { margin: 0 0 16px; }
+.doc ul, .doc ol { padding-left: 24px; }
+.doc li { margin-bottom: 6px; }
+
+.doc a {
+    color: var(--link);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.doc a:hover { color: var(--link-hover); }
+
+.doc strong { font-weight: 700; }
+
+/* Doc masthead block: app / publisher / contact / last updated */
+.meta {
+    color: var(--sub);
+    font-size: 0.88rem;
+    margin: 0 0 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--line);
+}
+.meta p { margin: 4px 0; }
+
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 16px 0 24px;
+}
+
+table { width: 100%; border-collapse: collapse; font-size: 0.94rem; }
+
+th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    vertical-align: top;
+}
+th { background: var(--card); font-weight: 700; }
+
+blockquote {
+    border-left: 3px solid var(--gold);
+    margin: 16px 0;
+    padding: 4px 16px;
+    color: var(--sub);
+}
+
+/* ============================================================
+   FOOTER — shared by all three pages
+   ============================================================ */
+footer.site {
+    border-top: 1px solid var(--line);
+    margin-top: 56px; padding: 32px 0 48px;
+    font-size: 0.82rem; color: var(--sub);
+}
+footer.site .links {
+    display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 18px;
+}
+/* Same >=24px hit-area reason as the header nav. These links wrap onto
+   several rows on a phone, so the padding also separates the rows. */
+footer.site .links a { padding: 5px 0; }
+footer.site a { color: var(--ink); text-decoration: none; font-weight: 600; }
+footer.site a:hover { text-decoration: underline; }
+footer.site .legal { max-width: 46em; }
+
+/* ============================================================
+   NARROW SCREENS
+   ============================================================ */
+@media (max-width: 600px) {
+    .wrap { padding: 0 16px; }
+    .doc { padding: 28px 16px 56px; }
+    .doc h1 { font-size: 1.6rem; }
+    .doc h2 { font-size: 1.1rem; margin: 32px 0 10px; }
+    .doc h3 { font-size: 1rem; }
+    header.site { padding: 18px 0 0; }
+    header.site nav { gap: 14px; }
+    header.site nav a { font-size: 0.8rem; }
+    table { font-size: 0.85rem; }
+    th, td { padding: 8px 10px; }
+}
+
+@media (max-width: 380px) {
+    .doc h1 { font-size: 1.45rem; }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    .cta { transition: none; }
+}
