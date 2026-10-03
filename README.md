@@ -22,6 +22,7 @@ Hosted via GitHub Pages at **https://banyanstudio.github.io/**
 ├── llms.txt                       ← structured summary for AI agents
 ├── .nojekyll                      ← serve files verbatim, no Jekyll processing
 ├── banyanstudio-legal/            ← redirect stubs for the pre-rename URLs
+├── nodi/                      ← same layout as statussaver/ (own site.css, icon.svg, no fonts)
 └── statussaver/
     ├── index.html                 ← Status Saver product page
     ├── index.md                   ← markdown mirror
@@ -43,6 +44,9 @@ differ per app, so legal copy is never shared or DRY-extracted across apps.
 | Status Saver | https://banyanstudio.github.io/statussaver/ |
 | Status Saver — Privacy Policy | https://banyanstudio.github.io/statussaver/privacy.html |
 | Status Saver — Terms & Conditions | https://banyanstudio.github.io/statussaver/terms.html |
+| Nodi | https://banyanstudio.github.io/nodi/ |
+| Nodi — Privacy Policy | https://banyanstudio.github.io/nodi/privacy.html |
+| Nodi — Terms & Conditions | https://banyanstudio.github.io/nodi/terms.html |
 
 The Play Store listing and the app's in-app links point at the privacy and terms URLs
 above. **Do not move or rename those two files.**

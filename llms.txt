@@ -1,6 +1,6 @@
 # Banyan Studio
 
-> Banyan Studio is an independent Android app publisher. This site hosts the product page
+> Banyan Studio is an independent Android app publisher. This site hosts the product pages
 > and the legal documents for its apps. Contact: banyanstudio.dev@gmail.com
 
 Every page on this site has a plain-markdown mirror at the same path with a `.md`
@@ -32,6 +32,28 @@ sign-up. Android 10 and later.
   Markdown: https://banyanstudio.github.io/statussaver/terms.md
 - [Google Play listing](https://play.google.com/store/apps/details?id=io.github.banyanstudio.statussaver):
   Where the app is installed from. Package: `io.github.banyanstudio.statussaver`
+
+## Nodi (Android app)
+
+A free personal attendance tracker for Android. Check in when the workday starts and out when
+it ends; the app marks the day Present or Half day, shows a month calendar and summary, weekly
+and yearly patterns, a home-screen widget and a checkout reminder. No internet access, no ads,
+no account. Android 8.0 and later.
+
+- [Nodi — product page](https://banyanstudio.github.io/nodi/): What the app does and the
+  install link.
+  Markdown: https://banyanstudio.github.io/nodi/index.md
+- [Nodi — Privacy Policy](https://banyanstudio.github.io/nodi/privacy.html): The app requests
+  no internet permission and collects nothing; records stay on the device. Covers on-device
+  storage, the user-exported backup file, Android device backup, permissions, retention and
+  rights. Last updated 2026-10-03.
+  Markdown: https://banyanstudio.github.io/nodi/privacy.md
+- [Nodi — Terms & Conditions](https://banyanstudio.github.io/nodi/terms.html): Licence, the
+  "personal record, not an official one" disclaimer, backups, reminders, governing law (India).
+  Last updated 2026-10-03.
+  Markdown: https://banyanstudio.github.io/nodi/terms.md
+- [Google Play listing](https://play.google.com/store/apps/details?id=com.deejayen.banyanstudio.attendance):
+  Where the app is installed from. Package: `com.deejayen.banyanstudio.attendance`
 
 ## Studio
 

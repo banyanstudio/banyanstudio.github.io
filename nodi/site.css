@@ -1,0 +1,281 @@
+/* ============================================================
+   Nodi — shared design layer
+   ------------------------------------------------------------
+   Used by every page under /nodi/: index.html, privacy.html,
+   terms.html. Holds the theme tokens, the shared header/footer
+   chrome, .cta, and the document typography the legal pages use.
+
+   Page-specific CSS does NOT belong here. The landing page's hero,
+   phone mockup and feature cards live inline in index.html,
+   because only one page uses them.
+
+   This palette is Nodi's, taken from the app's own theme
+   (ui/theme/Color.kt: LightPalette / DarkPalette / *Status). It is
+   deliberately separate from /style.css and /statussaver/site.css —
+   each app keeps its own identity.
+
+   No web fonts: the app itself draws with the system typeface, so
+   the site does too. That also keeps the "no third-party asset"
+   rule trivially true.
+   ============================================================ */
+
+/* ============================================================
+   THEME TOKENS — every colour is a var that flips per theme.
+   ============================================================ */
+:root {
+    --page: #FAFAF7;          /* paper */
+    --card: #FFFFFF;
+    --sunken: #F4F3EE;
+    --ink: #1B1B18;
+    /* Not the app's inkDim (#8C8A80): that is ~3.3:1 on paper and fails
+       WCAG AA for body copy. Ink at 64% lands ~5.3:1. */
+    --sub: rgba(27, 27, 24, 0.64);
+    --line: #E8E6DE;          /* hairline */
+    --accent: #1E7A46;
+    --on-accent: #FFFFFF;
+
+    /* links reuse the accent: ~5.2:1 on paper */
+    --link: #1E7A46;
+    --link-hover: #176037;
+
+    /* status hues (base / tint), light theme */
+    --present: #1E7A46; --present-tint: #E2F2E8;
+    --half: #A16207;    --half-tint: #FBEFD3;
+    --absent: #B3382E;  --absent-tint: #F9E3E0;
+    --holiday: #2F5FA8; --holiday-tint: #E1EAF7;
+
+    /* phone mockup */
+    --phone-bezel: #1B1B18;
+    --phone-ring: transparent;
+    --phone-screen: #FAFAF7;
+    --phone-shadow: 0 20px 50px rgba(27, 27, 24, 0.18);
+
+    --cta-glow: rgba(30, 122, 70, 0.28);
+    --cta-glow-hover: rgba(30, 122, 70, 0.38);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --page: #121210;
+        --card: #1B1B18;
+        --sunken: #242420;
+        --ink: #F2F0E8;
+        --sub: rgba(242, 240, 232, 0.64);
+        --line: #2E2E29;
+        --accent: #5FB183;
+        --on-accent: #0C1A12;
+
+        --link: #5FB183;
+        --link-hover: #7FC59D;
+
+        --present: #5FB183; --present-tint: #1B3227;
+        --half: #D6A143;    --half-tint: #33280F;
+        --absent: #E08A7E;  --absent-tint: #3A211D;
+        --holiday: #7FA8E0; --holiday-tint: #1B2739;
+
+        --phone-bezel: #242420;
+        --phone-ring: #2E2E29;
+        --phone-screen: #121210;
+        --phone-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+
+        --cta-glow: rgba(95, 177, 131, 0.20);
+        --cta-glow-hover: rgba(95, 177, 131, 0.30);
+    }
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+    background: var(--page);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.6;
+}
+
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+a:focus-visible,
+.cta:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* ============================================================
+   HEADER — shared by all three pages
+   ============================================================ */
+header.site { padding: 28px 0 0; }
+
+header.site .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 14px;
+}
+
+.studio {
+    font-weight: 800; font-size: 0.95rem; letter-spacing: -0.02em;
+    color: var(--ink); text-decoration: none;
+}
+.studio:hover { opacity: 0.75; }
+
+header.site nav {
+    display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
+}
+
+/* padding, not line-height: grows the hit area to >=24px tall for
+   WCAG 2.2 SC 2.5.8 without moving the label. */
+header.site nav a {
+    font-size: 0.85rem; font-weight: 600; color: var(--sub);
+    text-decoration: none;
+    padding: 5px 0;
+}
+header.site nav a:hover { color: var(--ink); }
+
+/* Current page marker carries weight as well as colour. */
+header.site nav a[aria-current="page"] {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+header.site nav a.nav-cta {
+    background: var(--accent); color: var(--on-accent);
+    font-weight: 700;
+    padding: 7px 16px; border-radius: 999px;
+}
+header.site nav a.nav-cta:hover { color: var(--on-accent); opacity: 0.88; }
+
+/* ============================================================
+   CTA — accent pill
+   ============================================================ */
+.cta {
+    display: inline-block;
+    background: var(--accent); color: var(--on-accent);
+    font-weight: 700; font-size: 1rem;
+    padding: 15px 34px; border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px var(--cta-glow);
+    transition: transform 120ms ease-out, box-shadow 120ms ease-out;
+}
+.cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px var(--cta-glow-hover);
+}
+
+/* ============================================================
+   DOCUMENT TYPOGRAPHY — the legal pages (privacy.html, terms.html)
+   ============================================================ */
+.doc { padding: 48px 24px 96px; }
+
+.doc h1 {
+    font-size: 2rem; font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+}
+
+.doc h2 {
+    font-size: 1.25rem; font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 40px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--line);
+}
+
+.doc h3 {
+    font-size: 1.06rem; font-weight: 700;
+    margin: 28px 0 10px;
+}
+
+.doc p, .doc ul, .doc ol { margin: 0 0 16px; }
+.doc ul, .doc ol { padding-left: 24px; }
+.doc li { margin-bottom: 6px; }
+
+.doc a {
+    color: var(--link);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.doc a:hover { color: var(--link-hover); }
+
+.doc strong { font-weight: 700; }
+
+.doc code {
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 0.88em;
+    background: var(--sunken);
+    padding: 1px 5px; border-radius: 4px;
+}
+
+/* Doc masthead block: app / publisher / contact / last updated */
+.meta {
+    color: var(--sub);
+    font-size: 0.88rem;
+    margin: 0 0 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--line);
+}
+.meta p { margin: 4px 0; }
+
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 16px 0 24px;
+}
+
+table { width: 100%; border-collapse: collapse; font-size: 0.94rem; }
+
+th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    vertical-align: top;
+}
+th { background: var(--sunken); font-weight: 700; }
+
+/* ============================================================
+   FOOTER — shared by all three pages
+   ============================================================ */
+footer.site {
+    border-top: 1px solid var(--line);
+    margin-top: 56px; padding: 32px 0 48px;
+    font-size: 0.82rem; color: var(--sub);
+}
+footer.site .links {
+    display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 18px;
+}
+footer.site .links a { padding: 5px 0; }
+footer.site a { color: var(--ink); text-decoration: none; font-weight: 600; }
+footer.site a:hover { text-decoration: underline; }
+footer.site .legal { max-width: 46em; }
+
+/* ============================================================
+   NARROW SCREENS
+   ============================================================ */
+@media (max-width: 600px) {
+    .wrap { padding: 0 16px; }
+    .doc { padding: 28px 16px 56px; }
+    .doc h1 { font-size: 1.6rem; }
+    .doc h2 { font-size: 1.1rem; margin: 32px 0 10px; }
+    .doc h3 { font-size: 1rem; }
+    header.site { padding: 18px 0 0; }
+    header.site nav { gap: 14px; }
+    header.site nav a { font-size: 0.8rem; }
+    table { font-size: 0.85rem; }
+    th, td { padding: 8px 10px; }
+}
+
+@media (max-width: 380px) {
+    .doc h1 { font-size: 1.45rem; }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    .cta { transition: none; }
+}

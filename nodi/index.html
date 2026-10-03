@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nodi — a simple attendance tracker for Android. Check in and out, and Nodi marks your day, counts your month and reminds you to check out. Works offline. No ads, no sign-up.">
+    <title>Nodi — attendance tracker</title>
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
+    <link rel="canonical" href="https://banyanstudio.github.io/nodi/">
+
+    <!-- Machine-readable mirror of this page, served as text/markdown.
+         Also listed in /llms.txt. -->
+    <link rel="alternate" type="text/markdown" href="index.md" title="Markdown version">
+
+    <meta property="og:title" content="Nodi — attendance tracker">
+    <meta property="og:description" content="Check in, check out. Nodi marks the day and counts your month. Works offline. No ads, no sign-up.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Banyan Studio">
+    <meta property="og:url" content="https://banyanstudio.github.io/nodi/">
+    <!-- Known gap: the icon is SVG, which most link-preview crawlers ignore. A raster
+         1200x630 card is a follow-up. -->
+    <meta name="twitter:card" content="summary">
+
+    <link rel="stylesheet" href="site.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://banyanstudio.github.io/#organization",
+          "name": "Banyan Studio",
+          "url": "https://banyanstudio.github.io/",
+          "email": "banyanstudio.dev@gmail.com"
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "Nodi",
+          "alternateName": "Nodi: Attendance Tracker",
+          "url": "https://banyanstudio.github.io/nodi/",
+          "operatingSystem": "Android 8.0 and later",
+          "applicationCategory": "BusinessApplication",
+          "description": "A personal attendance tracker. Check in and out each day; the app marks the day Present or Half day, shows a month calendar and summary, weekly and yearly patterns, a home-screen widget and a checkout reminder. Works offline with no account.",
+          "downloadUrl": "https://play.google.com/store/apps/details?id=com.deejayen.banyanstudio.attendance",
+          "installUrl": "https://play.google.com/store/apps/details?id=com.deejayen.banyanstudio.attendance",
+          "publisher": { "@id": "https://banyanstudio.github.io/#organization" },
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "privacyPolicy": "https://banyanstudio.github.io/nodi/privacy.html",
+          "termsOfService": "https://banyanstudio.github.io/nodi/terms.html"
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        /* ============================================================
+           LANDING-PAGE-ONLY CSS.
+           Tokens, base, header, footer and .cta live in site.css, which
+           every page under /nodi/ shares. Everything below is used by
+           this page alone.
+           ============================================================ */
+
+        /* HERO — copy left / phone right >=760px */
+        .hero { padding: 64px 0 40px; }
+        @media (min-width: 760px) {
+            .hero {
+                display: grid;
+                grid-template-columns: 52fr 48fr;
+                align-items: center;
+                gap: 40px;
+                padding: 88px 0 56px;
+            }
+        }
+
+        .app-mark {
+            width: 56px; height: 56px;
+            display: block;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 8px 20px rgba(30, 122, 70, 0.28));
+        }
+        @media (prefers-color-scheme: dark) {
+            .app-mark { filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.5)); }
+        }
+
+        .eyebrow {
+            font-size: 0.78rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.14em;
+            color: var(--sub);
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-weight: 800;
+            font-size: clamp(2.2rem, 6vw, 3.3rem);
+            line-height: 1.08;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+        }
+        .hero h1 .soft { color: var(--accent); }
+
+        .hero .lede {
+            font-size: 1.08rem; font-weight: 500;
+            color: var(--sub); max-width: 32em;
+            margin-bottom: 32px;
+        }
+
+        .trust {
+            margin-top: 24px;
+            font-size: 0.82rem; font-weight: 600; color: var(--sub);
+        }
+        .trust .mid { color: var(--accent); padding: 0 6px; }
+
+        /* PHONE MOCKUP (decorative, aria-hidden) — Home's Today card,
+           month calendar and summary strip, drawn with the app's tokens. */
+        .hero-visual {
+            display: flex; flex-direction: column; align-items: center;
+            margin-top: 48px;
+        }
+        @media (min-width: 760px) {
+            .hero-visual { margin-top: 0; }
+        }
+
+        .phone {
+            width: 260px; max-width: 78vw;
+            aspect-ratio: 1 / 2;
+            background: var(--phone-bezel);
+            border-radius: 30px;
+            padding: 10px;
+            box-shadow: var(--phone-shadow), inset 0 0 0 1px var(--phone-ring);
+        }
+        @media (min-width: 760px) {
+            .phone { transform: rotate(2deg); }
+        }
+        .screen {
+            width: 100%; height: 100%;
+            background: var(--phone-screen);
+            border-radius: 22px;
+            padding: 16px 12px;
+            display: flex; flex-direction: column; gap: 10px;
+            overflow: hidden;
+        }
+
+        .s-title { font-size: 0.95rem; font-weight: 800; letter-spacing: -0.02em; padding: 0 2px; }
+
+        .s-card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 10px;
+        }
+        .s-date { font-size: 0.6rem; color: var(--sub); font-weight: 600; }
+        .s-status {
+            font-size: 1.05rem; font-weight: 800; letter-spacing: -0.02em;
+            color: var(--present); margin: 2px 0 8px;
+        }
+        .s-stamps { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .s-stamp {
+            background: var(--sunken); border-radius: 8px; padding: 5px 7px;
+        }
+        .s-stamp small { display: block; font-size: 0.52rem; color: var(--sub); font-weight: 600; }
+        .s-stamp b { font-size: 0.78rem; font-weight: 700; }
+        .s-stamp.empty b { color: var(--sub); }
+        .s-foot { font-size: 0.56rem; color: var(--sub); margin: 7px 0 8px; }
+        .s-btn {
+            background: var(--accent); color: var(--on-accent);
+            border-radius: 999px; text-align: center;
+            font-size: 0.68rem; font-weight: 700; padding: 6px 0;
+        }
+
+        .s-cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+        .s-cal i {
+            aspect-ratio: 1; border-radius: 50%;
+            background: var(--sunken);
+        }
+        .s-cal i.p { background: var(--present-tint); box-shadow: inset 0 0 0 1.5px var(--present); }
+        .s-cal i.h { background: var(--half-tint);    box-shadow: inset 0 0 0 1.5px var(--half); }
+        .s-cal i.a { background: var(--absent-tint);  box-shadow: inset 0 0 0 1.5px var(--absent); }
+        .s-cal i.o { background: var(--holiday-tint); box-shadow: inset 0 0 0 1.5px var(--holiday); }
+        .s-cal i.t { background: var(--accent); }
+        .s-cal i.x { visibility: hidden; }
+
+        .s-sum { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+        .s-sum div {
+            background: var(--card); border: 1px solid var(--line);
+            border-radius: 8px; padding: 5px 2px; text-align: center;
+        }
+        .s-sum b { display: block; font-size: 0.74rem; font-weight: 800; }
+        .s-sum small { font-size: 0.46rem; color: var(--sub); font-weight: 600; white-space: nowrap; }
+
+        .tile-note {
+            text-align: center; font-size: 0.82rem; color: var(--sub);
+            max-width: 22em; margin-top: 22px;
+        }
+
+        /* FEATURES — 2x2 >=760px */
+        .features {
+            padding: 64px 0 8px;
+            display: grid; gap: 14px;
+        }
+        @media (min-width: 760px) {
+            .features { grid-template-columns: repeat(2, 1fr); }
+        }
+        .feature {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 26px;
+        }
+        .feature .glyph { width: 28px; height: 28px; margin-bottom: 16px; color: var(--accent); }
+        .feature .glyph svg { width: 28px; height: 28px; display: block; }
+        .feature h2 {
+            font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em;
+            margin-bottom: 8px;
+        }
+        .feature p { font-size: 0.94rem; color: var(--sub); }
+
+        /* NOTE ASIDE */
+        .note {
+            margin: 32px 0 0; padding: 18px 24px;
+            border-left: 3px solid var(--accent);
+            font-size: 0.88rem; color: var(--sub);
+        }
+
+        /* CLOSING */
+        .closing {
+            text-align: center;
+            padding: 72px 0 20px;
+            margin-top: 56px;
+            border-top: 1px solid var(--line);
+        }
+        .closing p {
+            font-weight: 800; letter-spacing: -0.02em;
+            font-size: clamp(1.5rem, 4vw, 1.85rem);
+            margin: 48px auto 28px;
+            text-wrap: balance;
+            max-width: 20em;
+        }
+
+        /* Official Google Play badge — never recoloured, cropped or
+           recreated (Google Play brand guidelines); the generic web badge
+           ships its clear space inside the PNG. */
+        .play-badge {
+            display: inline-block;
+            line-height: 0;
+            transition: transform 120ms ease-out;
+        }
+        .play-badge:hover { transform: translateY(-1px); }
+        .play-badge img { display: block; width: 220px; height: auto; }
+        @media (prefers-reduced-motion: reduce) {
+            .play-badge { transition: none; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site">
+        <div class="wrap">
+            <a class="studio" href="../">Banyan Studio</a>
+            <nav>
+                <a href="./" aria-current="page">Nodi</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a class="nav-cta" href="https://play.google.com/store/apps/details?id=com.deejayen.banyanstudio.attendance">Get the app</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="wrap">
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-copy">
+                <img class="app-mark" src="icon.svg" alt="Nodi app icon" width="56" height="56">
+                <p class="eyebrow">Nodi &middot; attendance tracker</p>
+                <h1>Check in. Check out.<br><span class="soft">The day marks itself.</span></h1>
+                <p class="lede">Tap once when your workday starts and once when it ends. Nodi marks the day Present or Half day, keeps your month on a calendar, and reminds you before your day is up.</p>
+                <a class="cta" href="https://play.google.com/store/apps/details?id=com.deejayen.banyanstudio.attendance">Get it on Google Play</a>
+                <p class="trust">No ads <span class="mid">&middot;</span> No sign-up <span class="mid">&middot;</span> Works offline</p>
+            </div>
+
+            <div class="hero-visual">
+                <div class="phone" aria-hidden="true">
+                    <div class="screen">
+                        <div class="s-title">Nodi</div>
+                        <div class="s-card">
+                            <div class="s-date">Friday · 3 October</div>
+                            <div class="s-status">Present</div>
+                            <div class="s-stamps">
+                                <div class="s-stamp"><small>Checked in</small><b>9:02 AM</b></div>
+                                <div class="s-stamp empty"><small>Checked out</small><b>--:--</b></div>
+                            </div>
+                            <div class="s-foot">3h 12m in · ends 5:02 PM</div>
+                            <div class="s-btn">Check out</div>
+                        </div>
+                        <div class="s-card">
+                            <div class="s-cal">
+                                <i class="x"></i><i class="x"></i><i class="p"></i><i class="p"></i><i class="h"></i><i class="p"></i><i class="o"></i>
+                                <i class="o"></i><i class="p"></i><i class="p"></i><i class="a"></i><i class="p"></i><i class="p"></i><i class="o"></i>
+                                <i class="o"></i><i class="p"></i><i class="p"></i><i class="p"></i><i class="p"></i><i class="t"></i><i></i>
+                                <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                            </div>
+                        </div>
+                        <div class="s-sum">
+                            <div><b>12</b><small>Present</small></div>
+                            <div><b>1</b><small>Half</small></div>
+                            <div><b>1</b><small>Absent</small></div>
+                            <div><b>39h</b><small>Avg / week</small></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="tile-note">Every day you check in lands on the calendar, coloured by how it went.</p>
+            </div>
+        </section>
+
+        <!-- FEATURES -->
+        <section class="features">
+            <div class="feature">
+                <div class="glyph" aria-hidden="true">
+                    <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="14" cy="14" r="11"/>
+                        <path d="M14 8v6l4 2.5"/>
+                    </svg>
+                </div>
+                <h2>One tap in, one tap out</h2>
+                <p>Check in when you start and out when you leave. Check out before half your workday is up and the day is marked Half day; otherwise it's Present. Forgot to punch? Fix the time later from the calendar.</p>
+            </div>
+            <div class="feature">
+                <div class="glyph" aria-hidden="true">
+                    <svg viewBox="0 0 28 28" fill="currentColor">
+                        <circle cx="5" cy="5" r="3"/><circle cx="14" cy="5" r="3"/><circle cx="23" cy="5" r="3"/>
+                        <circle cx="5" cy="14" r="3"/><circle cx="14" cy="14" r="3" opacity=".45"/><circle cx="23" cy="14" r="3"/>
+                        <circle cx="5" cy="23" r="3" opacity=".45"/><circle cx="14" cy="23" r="3"/><circle cx="23" cy="23" r="3" opacity=".45"/>
+                    </svg>
+                </div>
+                <h2>Your month at a glance</h2>
+                <p>A calendar coloured by Present, Half day, Absent and Holiday, with a running count and your average week. Patterns shows when you worked each day of the week, and the whole year on one screen.</p>
+            </div>
+            <div class="feature">
+                <div class="glyph" aria-hidden="true">
+                    <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 19V12a7 7 0 0 1 14 0v7l2 2.5H5L7 19z"/>
+                        <path d="M11.5 24.5a2.6 2.6 0 0 0 5 0"/>
+                    </svg>
+                </div>
+                <h2>Widget and reminder</h2>
+                <p>Check in or out straight from your home screen. And a reminder before your workday ends, so you remember to check out.</p>
+            </div>
+            <div class="feature">
+                <div class="glyph" aria-hidden="true">
+                    <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="6" y="12" width="16" height="12" rx="3"/>
+                        <path d="M9.5 12V8.5a4.5 4.5 0 0 1 9 0V12"/>
+                    </svg>
+                </div>
+                <h2>Stays on your phone</h2>
+                <p>Nodi has no internet access at all &mdash; no account, no ads, no analytics. Export a backup file whenever you like, and import it on a new phone.</p>
+            </div>
+        </section>
+
+        <!-- NOTE ASIDE -->
+        <aside class="note">
+            Nodi is for keeping your own record. It isn&rsquo;t connected to your employer&rsquo;s systems and isn&rsquo;t an official timesheet.
+        </aside>
+
+        <!-- CLOSING -->
+        <section class="closing" id="get">
+            <p>Your workdays, kept by&nbsp;you.</p>
+            <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.deejayen.banyanstudio.attendance">
+                <img src="google-play-badge.png" alt="Get it on Google Play" width="646" height="250">
+            </a>
+        </section>
+    </main>
+
+    <footer class="site">
+        <div class="wrap">
+            <div class="links">
+                <a href="../">Banyan Studio</a>
+                <a href="./">Nodi</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms &amp; Conditions</a>
+                <a href="mailto:banyanstudio.dev@gmail.com">Contact</a>
+            </div>
+            <p class="legal">&copy; Banyan Studio. Nodi is a personal attendance tracker. It is not connected to any employer, payroll or HR system. Google Play and the Google Play logo are trademarks of Google&nbsp;LLC.</p>
+        </div>
+    </footer>
+</body>
+</html>

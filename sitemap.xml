@@ -2,8 +2,8 @@
 <!--
   Sitemap for https://banyanstudio.github.io/
 
-  Lists canonical HTML pages only. The .md mirrors (privacy.md, terms.md,
-  statussaver/index.md) are alternate representations of the pages above, not
+  Lists canonical HTML pages only. The .md mirrors (privacy.md, terms.md and
+  index.md under each app) are alternate representations of the pages above, not
   separate documents, so they are declared via <link rel="alternate"> in each
   page and in /llms.txt rather than here.
 -->
@@ -11,7 +11,7 @@
 
   <url>
     <loc>https://banyanstudio.github.io/</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-10-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -33,6 +33,27 @@
   <url>
     <loc>https://banyanstudio.github.io/statussaver/terms.html</loc>
     <lastmod>2026-06-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://banyanstudio.github.io/nodi/</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://banyanstudio.github.io/nodi/privacy.html</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://banyanstudio.github.io/nodi/terms.html</loc>
+    <lastmod>2026-10-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
