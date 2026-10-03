@@ -52,8 +52,8 @@ no account. Android 8.0 and later.
   "personal record, not an official one" disclaimer, backups, reminders, governing law (India).
   Last updated 2026-10-03.
   Markdown: https://banyanstudio.github.io/nodi/terms.md
-- [Google Play listing](https://play.google.com/store/apps/details?id=com.deejayen.banyanstudio.attendance):
-  Where the app is installed from. Package: `com.deejayen.banyanstudio.attendance`
+- [Google Play listing](https://play.google.com/store/apps/details?id=io.github.banyanstudio.nodi):
+  Where the app is installed from. Package: `io.github.banyanstudio.nodi`
 
 ## Studio
 

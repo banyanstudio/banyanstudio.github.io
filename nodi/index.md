@@ -6,7 +6,7 @@ Tap once when your workday starts and once when it ends. Nodi marks the day Pres
 
 No ads · No sign-up · Works offline · Android 8.0 and later · Free
 
-[Get it on Google Play](https://play.google.com/store/apps/details?id=com.deejayen.banyanstudio.attendance)
+[Get it on Google Play](https://play.google.com/store/apps/details?id=io.github.banyanstudio.nodi)
 
 ## One tap in, one tap out
 
